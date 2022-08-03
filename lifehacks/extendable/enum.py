@@ -7,11 +7,10 @@
 '''
 
 from __future__ import annotations
-from itertools import chain
 from typing import Generic, Iterable, TypeVar
 
-from lifehacks.extendable.meta import meta
-from lifehacks.extendable.enum.exceptions import ENUM_NO_INSTANTIATION
+from .meta import meta
+from .exceptions import EnumException
 
 
 T = TypeVar('T')
@@ -34,13 +33,13 @@ class enum(type, Generic[T]):
 		bases:tuple[type], dictionary:dict
 	) -> type:
 		created_class = super(cls, cls).__new__(cls, name, bases, dictionary)
-		created_class.__init__ = ENUM_NO_INSTANTIATION
+		created_class.__init__ = enum.NO_INSTANTIATION
 		return created_class
 
 	def __str__(cls) -> str:
 		# original = repr(cls).strip('<>')
 		fields = ', '.join(f'{name}={value}' for name, value in cls)
-		return f'<{type(cls).__name__} {cls.__name__}({fields})>'
+		return f'<{cls.__class__.__name__} {cls.__name__}({fields})>'
 
 	def __iter__(cls) -> Iterable[tuple[str, T]]:
 		'''	return all enum items from this enum
@@ -66,3 +65,7 @@ class enum(type, Generic[T]):
 			```
 		'''
 		return obj in [ attr for _, attr in cls ]
+
+	@staticmethod
+	def NO_INSTANTIATION(*args, **kwargs):
+		raise EnumException('Enum classes cannot be instantiated')

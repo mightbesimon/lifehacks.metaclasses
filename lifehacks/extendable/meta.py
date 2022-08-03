@@ -7,17 +7,17 @@
 '''
 
 from __future__ import annotations
+from functools import wraps
 from typing import Any, Callable
 
 
 def decoratable(
-	f:Callable[[type, str, tuple[type], dict], meta]
+	undecoratable:Callable[[type, str, tuple[type], dict], meta]
 ) -> Callable[..., meta]:
 	'''
 	'''
-	def __new__(cls:type,
-		*args:Any
-	) -> type:
+	@wraps(undecoratable)
+	def __new__(cls:type, *args:Any) -> type:
 		if (len(args)==3
 			and isinstance(args[0], str)
 			and isinstance(args[1], tuple)
@@ -25,7 +25,7 @@ def decoratable(
 		):
 			# called as metaclass=yourmeta or yourmeta(name, bases, dict)
 			name, bases, dictionary = args
-			return f(cls, name, bases, dictionary)
+			return undecoratable(cls, name, bases, dictionary)
 
 		if len(args)==1 and isinstance(args[0], type):
 			# called as @yourmeta
@@ -78,7 +78,7 @@ class meta(type):
 		bases:tuple[type],
 		dictionary:dict
 	) -> type:
-		created_metaclass = super(meta, cls).__new__(cls, name, bases, dictionary)
+		created_metaclass = super(cls, cls).__new__(cls, name, bases, dictionary)
 		created_metaclass.__repr__ = meta.__repr__
 		created_metaclass.__new__ = decoratable(created_metaclass.__new__)
 		return created_metaclass
@@ -91,7 +91,7 @@ class meta(type):
 			<enum 'Palette'>
 			```
 		'''
-		return f'<{type(cls).__name__} \'{cls.__module__}.{cls.__name__}\'>'
+		return f'<{cls.__class__.__name__} \'{cls.__module__}.{cls.__name__}\'>'
 
 
 # self-decorate meta metaclass

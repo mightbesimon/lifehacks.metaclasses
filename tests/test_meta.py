@@ -7,7 +7,7 @@
 '''
 
 from unittest import TestCase, main
-from lifehacks.extendable.meta import meta
+from lifehacks.extendable import meta
 
 
 ################################################################

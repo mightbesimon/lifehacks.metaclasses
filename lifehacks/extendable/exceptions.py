@@ -8,7 +8,3 @@
 
 class EnumException(Exception):
 	...
-
-
-def ENUM_NO_INSTANTIATION(*args, **kwargs):
-	raise EnumException('Enum classes cannot be instantiated')
