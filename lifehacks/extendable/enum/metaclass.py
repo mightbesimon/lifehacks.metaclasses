@@ -38,9 +38,9 @@ class enum(type, Generic[T]):
 		return created_class
 
 	def __str__(cls) -> str:
-		original = repr(cls).strip('<>')
+		# original = repr(cls).strip('<>')
 		fields = ', '.join(f'{name}={value}' for name, value in cls)
-		return f'<{original}({fields})>'
+		return f'<{type(cls).__name__} {cls.__name__}({fields})>'
 
 	def __iter__(cls) -> Iterable[tuple[str, T]]:
 		'''	return all enum items from this enum
@@ -51,17 +51,11 @@ class enum(type, Generic[T]):
 				template = template.replace(name, str(value))
 			```
 		'''
-		iter_self = ( (name, attr)
-			for name, attr in cls.__dict__.items()
-			if name==name.strip('_')
+		return (
+			(name, getattr(cls, name))
+			for name in dir(cls)
+			if name==name.lstrip('_')
 		)
-		try:
-			return chain(iter_self, ( (name, attr)
-				for name, attr in cls.__base__
-				if name==name.strip('_')
-			))
-		except TypeError:
-			return iter_self
 
 	def __contains__(cls, obj:T) -> bool:
 		'''	check if obj is in this enum
@@ -71,11 +65,4 @@ class enum(type, Generic[T]):
 			rgba(0,0,0) in Palette  # True
 			```
 		'''
-		in_self = obj in [ attr
-			for name, attr in cls.__dict__.items()
-			if name==name.strip('_')
-		]
-		try:
-			return in_self or obj in cls.__base__
-		except TypeError:
-			return in_self
+		return obj in [ attr for _, attr in cls ]
