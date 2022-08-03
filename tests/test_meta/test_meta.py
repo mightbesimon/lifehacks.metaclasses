@@ -11,11 +11,6 @@ from lifehacks.extendable.meta import meta
 
 
 ################################################################
-#######                     fixtures                      #######
-################################################################
-
-
-################################################################
 #######                      tests                       #######
 ################################################################
 class TestMeta(TestCase):
@@ -24,18 +19,53 @@ class TestMeta(TestCase):
 		@meta
 		class enum(type):
 			...
+
 		self.assertIsInstance(enum, meta)
+		self.assertEqual(type(enum), meta)
+		self.assertEqual(repr(enum), f'<meta \'{enum.__module__}.enum\'>')
+		self.assertEqual(repr(meta), f'<meta \'{meta.__module__}.meta\'>')
+
+		@enum
+		class Palette:
+			...
+
+		self.assertIsInstance(Palette, enum)
+		self.assertEqual(type(Palette), enum)
+		self.assertEqual(repr(Palette), f'<enum \'{Palette.__module__}.Palette\'>')
 
 	def test_meta_decorator_paran(self) -> None:
 		@meta()
 		class enum(type):
 			...
+
 		self.assertIsInstance(enum, meta)
+		self.assertEqual(type(enum), meta)
+		self.assertEqual(repr(enum), f'<meta \'{enum.__module__}.enum\'>')
+		self.assertEqual(repr(meta), f'<meta \'{meta.__module__}.meta\'>')
+
+		@enum()
+		class Palette:
+			...
+
+		self.assertIsInstance(Palette, enum)
+		self.assertEqual(type(Palette), enum)
+		self.assertEqual(repr(Palette), f'<enum \'{Palette.__module__}.Palette\'>')
 
 	def test_meta_metaclass(self) -> None:
 		class enum(type, metaclass=meta):
 			...
+
 		self.assertIsInstance(enum, meta)
+		self.assertEqual(type(enum), meta)
+		self.assertEqual(repr(enum), f'<meta \'{enum.__module__}.enum\'>')
+		self.assertEqual(repr(meta), f'<meta \'{meta.__module__}.meta\'>')
+
+		class Palette(metaclass=enum):
+			...
+
+		self.assertIsInstance(Palette, enum)
+		self.assertEqual(type(Palette), enum)
+		self.assertEqual(repr(Palette), f'<enum \'{Palette.__module__}.Palette\'>')
 
 
 ################################################################

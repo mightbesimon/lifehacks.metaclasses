@@ -6,6 +6,49 @@
 	explicit or implicit permission.
 '''
 
+from __future__ import annotations
+from typing import Any, Callable
+
+
+def decoratable(
+	f:Callable[[type, str, tuple[type], dict], meta]
+) -> Callable[..., meta]:
+	'''
+	'''
+	def __new__(cls:type,
+		*args:Any
+	) -> type:
+		if (len(args)==3
+			and isinstance(args[0], str)
+			and isinstance(args[1], tuple)
+			and isinstance(args[2], dict)
+		):
+			# called as metaclass=yourmeta or yourmeta(name, bases, dict)
+			name, bases, dictionary = args
+			return f(cls, name, bases, dictionary)
+
+		if len(args)==1 and isinstance(args[0], type):
+			# called as @yourmeta
+			return cls(
+				args[0].__name__,
+				args[0].__bases__,
+				dict(args[0].__dict__),
+			)
+
+		if not args:
+			# called as @yourmeta()
+			# cls -> yourmeta:meta
+			return cls
+
+		raise Exception(
+			'no matching use case\n\n'
+			'YourClass(metaclass=yourmeta):\n\t...\n\n'
+			'@yourmeta\nclass YourClass:\n\t...\n\n'
+			'@yourmeta()\nclass YourClass:\n\t...\n\n'
+		)
+
+	return __new__
+
 
 class meta(type):
 	''' metaclass for metaclasses 🍾\n
@@ -29,31 +72,16 @@ class meta(type):
 			...
 		```
 	'''
-	def __new__(cls, metaclass=None, *args):
-		''' `@yourmeta()`
-			-> `@yourmeta`
-			-> `metaclass=yourmeta`
-			-> `yourmeta(name, bases, dict)`
-		'''
-		if args:
-			# called as metaclass=meta or meta(name, bases, dict)
-			return super(meta, cls).__new__(cls, metaclass, *args)
-
-		if metaclass is None:
-			# called as @meta()
-			return cls
-
-		# called as @meta
-		dictionary = dict(metaclass.__dict__)
-		dictionary.update(
-			__new__=meta.__new__,
-			__repr__=meta.__repr__,
-		)
-		return cls(
-			metaclass.__name__,
-			metaclass.__bases__,
-			dictionary,
-		)
+	@decoratable
+	def __new__(cls:type,
+		name:str,
+		bases:tuple[type],
+		dictionary:dict
+	) -> type:
+		created_metaclass = super(meta, cls).__new__(cls, name, bases, dictionary)
+		created_metaclass.__repr__ = meta.__repr__
+		created_metaclass.__new__ = decoratable(created_metaclass.__new__)
+		return created_metaclass
 
 	def __repr__(cls) -> str:
 		'''	example:
