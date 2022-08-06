@@ -60,16 +60,13 @@ class meta(type):
 		example:
 		```python
 		@meta
-		class enum(type):
-			...
+		class enum(type): ...
 
-		@enum	# <- decorator creation syntax
-		class Palette1:
-			...
+		@enum	# decorator creation syntax
+		class Palette1: ...
 
 		# normal metaclass syntax
-		class Palette2(metaclass=enum):
-			...
+		class Palette2(metaclass=enum): ...
 		```
 	'''
 	@decoratable
@@ -93,6 +90,8 @@ class meta(type):
 		'''
 		return f'<{cls.__class__.__name__} \'{cls.__module__}.{cls.__name__}\'>'
 
+
+################################################################
 
 # self-decorate meta metaclass
 meta = meta(meta)

@@ -20,12 +20,27 @@ T = TypeVar('T')
 ################################################################
 @meta
 class enum(type, Generic[T]):
-	''' metaclass for `Enum`\n
-		can be used as a `type` for type hinting\n
+	''' metaclass for enum classes
+		```python
+		@enum
+		class Palette: ...
+		```
+		with typing:
+		```python
+		class Palette(metaclass=enum[Colour]): ...
+		```
+		extending `Palette`:
+		```python
+		class Mariana(Palette): ...
+		```
+		can be used as a `type` for type hinting
 		e.g.
 		```python
-		def use_theme(self, theme:enum) -> None:
-			self.theme:enum = theme
+		def print_colours(palette:enum) -> None:
+			for name, value in palette:
+				print(name, value)
+
+		print_colours(Mariana)
 		```
 	'''
 
@@ -37,7 +52,6 @@ class enum(type, Generic[T]):
 		return created_class
 
 	def __str__(cls) -> str:
-		# original = repr(cls).strip('<>')
 		fields = ', '.join(f'{name}={value}' for name, value in cls)
 		return f'<{cls.__class__.__name__} {cls.__name__}({fields})>'
 
@@ -61,7 +75,7 @@ class enum(type, Generic[T]):
 			as well as in base enums\n
 			e.g.
 			```python
-			rgba(0,0,0) in Palette  # True
+			rgba(0,0,0,1) in Palette  # True
 			```
 		'''
 		return obj in [ attr for _, attr in cls ]
