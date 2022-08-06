@@ -7,12 +7,13 @@
 '''
 
 from __future__ import annotations
-from .decoratable import decoratable
+from .metaclassdecorator import metaclassdecorator
 
 
 ################################################################
 #######                    metaclass                     #######
 ################################################################
+@metaclassdecorator
 class meta(type):
 	''' metaclass for metaclasses 🍾\n
 		what an invention! 🎉\n
@@ -32,7 +33,6 @@ class meta(type):
 		class Palette2(metaclass=enum): ...
 		```
 	'''
-	@decoratable
 	def __new__(cls:type,
 		name:str,
 		bases:tuple[type],
@@ -40,8 +40,7 @@ class meta(type):
 	) -> type:
 		created_metaclass = super(cls, cls).__new__(cls, name, bases, dictionary)
 		created_metaclass.__repr__ = meta.__repr__
-		created_metaclass.__new__ = decoratable(created_metaclass.__new__)
-		return created_metaclass
+		return metaclassdecorator(created_metaclass)
 
 	def __repr__(cls) -> str:
 		'''	example:

@@ -8,14 +8,21 @@
 
 from __future__ import annotations
 from functools import wraps
-from typing import Any, Callable
+from typing import Any
 
 
-def decoratable(
-	target_new:Callable[[type, str, tuple[type], dict], type]
-) -> Callable[..., type]:
+def metaclassdecorator(cls:type) -> type:
+	'''	make metaclass decoratable
+		```python
+		class Palette(metaclass=enum): ...
+		# without
+
+		@enum	# clean syntax, readable
+		class Palette: ...
+		```
 	'''
-	'''
+	target_new = cls.__new__
+
 	@wraps(target_new)
 	def __new__(cls:type, *args:Any) -> type:
 		if (len(args)==3
@@ -23,12 +30,12 @@ def decoratable(
 			and isinstance(args[1], tuple)
 			and isinstance(args[2], dict)
 		):
-			# called as metaclass=yourmeta or yourmeta(name, bases, dict)
+			# called as metaclass=enum or enum(name, bases, dict)
 			name, bases, dictionary = args
 			return target_new(cls, name, bases, dictionary)
 
 		if len(args)==1 and isinstance(args[0], type):
-			# called as @yourmeta
+			# called as @enum
 			return cls(
 				args[0].__name__,
 				args[0].__bases__,
@@ -36,15 +43,16 @@ def decoratable(
 			)
 
 		if not args:
-			# called as @yourmeta()
-			# cls -> yourmeta:meta
+			# called as @enum()
+			# cls -> enum:meta
 			return cls
 
-		raise Exception(
+		raise TypeError(
 			'no matching use case\n\n'
 			'YourClass(metaclass=yourmeta):\n\t...\n\n'
 			'@yourmeta\nclass YourClass:\n\t...\n\n'
 			'@yourmeta()\nclass YourClass:\n\t...\n\n'
 		)
 
-	return __new__
+	cls.__new__ = __new__
+	return cls
