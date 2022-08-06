@@ -20,7 +20,7 @@ T = TypeVar('T')
 ################################################################
 @meta
 class enum(type, Generic[T]):
-	''' metaclass for enum classes
+	'''	metaclass for enum classes
 		```python
 		@enum
 		class Palette: ...

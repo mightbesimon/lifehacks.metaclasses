@@ -15,7 +15,7 @@ from .metaclassdecorator import metaclassdecorator
 ################################################################
 @metaclassdecorator
 class meta(type):
-	''' metaclass for metaclasses 🍾\n
+	'''	metaclass for metaclasses 🍾\n
 		what an invention! 🎉\n
 		allows subsequent metaclasses to use the decorator
 		creation syntax.\n
