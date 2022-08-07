@@ -3,17 +3,16 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lifehacks.extendable"
-version = "0.1.0"
+name = "lifehacks.metaclasses"
+version = "0.99.99"
 authors = [
   { name="mightbesimon" },
 ]
-description = "metaclass for metaclasses"
+description = "@enum, @meta metaclasses"
 readme = "README.md"
 license = { file="LICENSE.md" }
 requires-python = ">=3.7"
 classifiers = [
-    "Development Status :: 1 - Planning",
     "Intended Audience :: Developers",
     "License :: Other/Proprietary License",
     "Operating System :: OS Independent",
@@ -24,5 +23,5 @@ classifiers = [
 
 [project.urls]
 "Homepage" = "https://mightbesimon.com"
-"Documentation" = "https://github.com/mightbesimon/lifehacks.extendable"
-"Source Code" = "https://github.com/mightbesimon/lifehacks.extendable"
+"Documentation" = "https://github.com/mightbesimon/lifehacks.metaclasses"
+"Source Code" = "https://github.com/mightbesimon/lifehacks.metaclasses"

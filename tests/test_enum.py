@@ -7,7 +7,7 @@
 '''
 
 from unittest import TestCase, main
-from lifehacks.extendable import enum, EnumException
+from lifehacks.metaclasses import enum, EnumException
 
 
 ################################################################

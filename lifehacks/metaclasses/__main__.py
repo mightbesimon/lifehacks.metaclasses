@@ -16,7 +16,7 @@ if __name__ == '__main__':
 		explicit or implicit permission.
 
 ################################################################
-#######               lifehacks.extendable               #######
+#######              lifehacks.metaclasses               #######
 ################################################################
 
 usage:
