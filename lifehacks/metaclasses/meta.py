@@ -13,7 +13,7 @@ from .metaclassdecorator import metaclassdecorator
 ################################################################
 #######                    metaclass                     #######
 ################################################################
-@metaclassdecorator
+# @metaclassdecorator	# otherwise vscode helper text won't show
 class meta(type):
 	'''	metaclass for metaclasses 🍾\n
 		what an invention! 🎉\n
@@ -54,6 +54,9 @@ class meta(type):
 
 
 ################################################################
+
+# otherwise vscode helper text won't show
+meta = metaclassdecorator(meta)
 
 # self-decorate meta metaclass
 meta = meta(meta)

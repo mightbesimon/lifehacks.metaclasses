@@ -18,8 +18,9 @@ T = TypeVar('T')
 ################################################################
 #######                    metaclass                     #######
 ################################################################
-@meta
-class enum(type, Generic[T]):
+# @meta
+# class enum(type, Generic[T]):
+class enum(type, Generic[T], metaclass=meta):
 	'''	metaclass for enum classes
 		```python
 		@enum
