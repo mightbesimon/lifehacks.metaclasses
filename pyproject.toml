@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lifehacks.metaclasses"
-version = "0.99.99"
+version = "1.0.0"
 authors = [
   { name="mightbesimon" },
 ]
-description = "@enum, @meta metaclasses"
+description = "enum, meta, EnumException"
 readme = "README.md"
 license = { file="LICENSE.md" }
 requires-python = ">=3.7"

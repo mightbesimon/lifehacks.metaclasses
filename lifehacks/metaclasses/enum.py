@@ -24,24 +24,23 @@ class enum(type, Generic[T], metaclass=meta):
 	'''	metaclass for enum classes
 		```python
 		@enum
-		class Palette: ...
-		```
-		with typing:
-		```python
-		class Palette(metaclass=enum[Colour]): ...
-		```
-		extending `Palette`:
-		```python
-		class Mariana(Palette): ...
-		```
-		can be used as a `type` for type hinting
-		e.g.
-		```python
+		class BasePalette:
+			BLACK = ...
+			WHITE = ...
+
+		# extending base palette enum
+		class SubPalette(BasePalette):
+			RED = ...
+			GREEN = ...
+
+		# can be used in type hinting
 		def print_colours(palette:enum) -> None:
 			for name, value in palette:
 				print(name, value)
 
-		print_colours(Mariana)
+		print_colours(BasePalette)
+		print_colours(SubPalette)
+		print(BasePalette.BLACK in SubPalette) # True
 		```
 	'''
 
