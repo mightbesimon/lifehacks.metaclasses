@@ -19,7 +19,7 @@ explicit or implicit permission.
 #######              lifehacks.metaclasses               #######
 ################################################################
 
-📦lifehacks.metaclasses
+📦 lifehacks.metaclasses
 ├── meta
 ├── enum
 └── EnumException

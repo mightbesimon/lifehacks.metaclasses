@@ -3,7 +3,7 @@
 ## Structure
 
 ```plaintext
-📦lifehacks.metaclasses
+📦 lifehacks.metaclasses
 ├── meta
 ├── enum
 └── EnumException

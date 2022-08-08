@@ -1,27 +1,27 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
 
 [project]
-name = "lifehacks.metaclasses"
-version = "1.0.0"
+name = 'lifehacks.metaclasses'
+version = '1.0.1'
 authors = [
-  { name="mightbesimon" },
+  { name='mightbesimon' },
 ]
-description = "enum, meta, EnumException"
-readme = "README.md"
-license = { file="LICENSE.md" }
-requires-python = ">=3.7"
+description = 'enum, meta, EnumException'
+readme = 'README.md'
+license = { file='LICENSE.md' }
+requires-python = '>=3.7'
 classifiers = [
-    "Intended Audience :: Developers",
-    "License :: Other/Proprietary License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Topic :: Software Development",
-    "Typing :: Typed",
+    'Intended Audience :: Developers',
+    'License :: Other/Proprietary License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3',
+    'Topic :: Software Development',
+    'Typing :: Typed',
 ]
 
 [project.urls]
-"Homepage" = "https://mightbesimon.com"
-"Documentation" = "https://github.com/mightbesimon/lifehacks.metaclasses"
-"Source Code" = "https://github.com/mightbesimon/lifehacks.metaclasses"
+'Homepage' = 'https://mightbesimon.com'
+'Source Code' = 'https://github.com/mightbesimon/lifehacks.metaclasses'
+'Documentation' = 'https://github.com/mightbesimon/lifehacks.metaclasses/#readme'
