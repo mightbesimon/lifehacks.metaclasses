@@ -7,7 +7,7 @@
 '''
 
 from __future__ import annotations
-from typing import Generic, Iterable, TypeVar
+from typing import Generic, Iterator, TypeVar
 
 from .meta import meta
 from .exceptions import EnumException
@@ -55,7 +55,7 @@ class enum(type, Generic[T], metaclass=meta):
 		fields = ', '.join(f'{name}={value}' for name, value in cls)
 		return f'<{cls.__class__.__name__} {cls.__name__}({fields})>'
 
-	def __iter__(cls) -> Iterable[tuple[str, T]]:
+	def __iter__(cls) -> Iterator[tuple[str, T]]:
 		'''	return all enum items from this enum
 			as well as from base enums\n
 			e.g.
