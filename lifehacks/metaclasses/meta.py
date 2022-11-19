@@ -7,13 +7,13 @@
 '''
 
 from __future__ import annotations
-from .metaclassdecorator import metaclassdecorator
-
+from typing import Any
+from .metadeco import metadeco
 
 ################################################################
 #######                    metaclass                     #######
 ################################################################
-# @metaclassdecorator	# otherwise vscode helper text won't show
+@metadeco
 class meta(type):
 	'''	metaclass for metaclasses 🍾\n
 		what an invention! 🎉\n
@@ -36,11 +36,11 @@ class meta(type):
 	def __new__(cls:type,
 		name:str,
 		bases:tuple[type],
-		dictionary:dict
+		attrs:dict[str, Any],
 	) -> type:
-		created_metaclass = super(cls, cls).__new__(cls, name, bases, dictionary)
+		created_metaclass: type = super().__new__(cls, name, bases, attrs)
 		created_metaclass.__repr__ = meta.__repr__
-		return metaclassdecorator(created_metaclass)
+		return metadeco(created_metaclass)
 
 	def __repr__(cls) -> str:
 		'''	example:
@@ -54,9 +54,6 @@ class meta(type):
 
 
 ################################################################
-
-# otherwise vscode helper text won't show
-meta = metaclassdecorator(meta)
 
 # self-decorate meta metaclass
 meta = meta(meta)

@@ -11,7 +11,7 @@ from functools import wraps
 from typing import Any
 
 
-def metaclassdecorator(cls:type) -> type:
+def metadeco(cls:type) -> type:
 	'''	make metaclass decoratable
 		```python
 		class Palette(metaclass=enum): ...
@@ -31,8 +31,8 @@ def metaclassdecorator(cls:type) -> type:
 			and isinstance(args[2], dict)
 		):
 			# called as metaclass=enum or enum(name, bases, dict)
-			name, bases, dictionary = args
-			return target_new(cls, name, bases, dictionary)
+			name, bases, attrs = args
+			return target_new(cls, name, bases, attrs)
 
 		if len(args)==1 and isinstance(args[0], type):
 			# called as @enum
@@ -54,5 +54,5 @@ def metaclassdecorator(cls:type) -> type:
 			'@yourmeta()\nclass YourClass:\n\t...\n\n'
 		)
 
-	cls.__new__ = __new__
+	cls.__new__ = __new__ # type: ignore
 	return cls
