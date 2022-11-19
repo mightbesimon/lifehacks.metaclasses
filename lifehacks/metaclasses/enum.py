@@ -7,7 +7,7 @@
 '''
 
 from __future__ import annotations
-from typing import Generic, Iterator, TypeVar
+from typing import Any, Generic, Iterator, TypeVar
 
 from .meta import meta
 from .exceptions import EnumException
@@ -18,9 +18,8 @@ T = TypeVar('T')
 ################################################################
 #######                    metaclass                     #######
 ################################################################
-# @meta
-# class enum(type, Generic[T]):
-class enum(type, Generic[T], metaclass=meta):
+@meta
+class enum(type, Generic[T]):
 	'''	metaclass for enum classes
 		```python
 		@enum
@@ -44,10 +43,12 @@ class enum(type, Generic[T], metaclass=meta):
 		```
 	'''
 
-	def __new__(cls:type, name:str,
-		bases:tuple[type], dictionary:dict
+	def __new__(cls:type,
+		name:str,
+		bases:tuple[type],
+		attrs:dict[str, Any],
 	) -> type:
-		created_class = super(cls, cls).__new__(cls, name, bases, dictionary)
+		created_class: type = super(enum, cls).__new__(cls, name, bases, attrs)  # type: ignore
 		created_class.__init__ = enum.NO_INSTANTIATION
 		return created_class
 
@@ -81,5 +82,5 @@ class enum(type, Generic[T], metaclass=meta):
 		return obj in [ attr for _, attr in cls ]
 
 	@staticmethod
-	def NO_INSTANTIATION(*args, **kwargs):
+	def NO_INSTANTIATION(*args:Any, **kwargs:Any):
 		raise EnumException('Enum classes cannot be instantiated')

@@ -25,7 +25,7 @@ class TestEnum(TestCase):
 		self.assertEqual(type(BaseEnum), enum)
 		self.assertEqual(repr(BaseEnum), f'<enum \'{BaseEnum.__module__}.BaseEnum\'>')
 
-	def test_enum_decorator_paran(self) -> None:
+	def test_enum_decorator_param(self) -> None:
 		@enum()
 		class BaseEnum:
 			ONE = 1
@@ -36,7 +36,7 @@ class TestEnum(TestCase):
 		self.assertEqual(repr(BaseEnum), f'<enum \'{BaseEnum.__module__}.BaseEnum\'>')
 
 	def test_enum_metaclass(self) -> None:
-		class BaseEnum(metaclass=enum):
+		class BaseEnum(metaclass=enum[int]):
 			ONE = 1
 			TWO = 2
 

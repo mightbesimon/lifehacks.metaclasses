@@ -6,5 +6,4 @@
 	explicit or implicit permission.
 '''
 
-class EnumException(Exception):
-	...
+class EnumException(Exception): ...

@@ -43,11 +43,11 @@ class TestMeta(TestCase):
 		self.assertEqual(repr(enum), f'<meta \'{enum.__module__}.enum\'>')
 		self.assertEqual(repr(meta), f'<meta \'{meta.__module__}.meta\'>')
 
-		@enum()
+		@enum()  # type: ignore
 		class Palette:
 			...
 
-		self.assertIsInstance(Palette, enum)
+		self.assertIsInstance(Palette, enum)  # type: ignore
 		self.assertEqual(type(Palette), enum)
 		self.assertEqual(repr(Palette), f'<enum \'{Palette.__module__}.Palette\'>')
 
