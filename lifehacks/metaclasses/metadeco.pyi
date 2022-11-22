@@ -6,4 +6,13 @@
 	explicit or implicit permission.
 '''
 
-def metadeco(cls:type) -> type: ...
+def metadeco(cls:type) -> type:
+	'''	make metaclass decoratable
+		```python
+		class Palette(metaclass=enum): ...
+		# without
+
+		@enum	# clean syntax, readable
+		class Palette: ...
+		```
+	'''

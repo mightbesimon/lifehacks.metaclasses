@@ -10,7 +10,31 @@ from typing import Any
 
 
 class meta(type):
-	'''stub'''
+	'''	metaclass for metaclasses 🍾\n
+		what an invention! 🎉\n
+		allows subsequent metaclasses to use the decorator
+		creation syntax.\n
+		When making metaclasses, this syntax super powerful!
+
+		example:
+		```python
+		@meta
+		class enum(type): ...
+
+		@enum	# decorator creation syntax
+		class Palette1: ...
+
+		# normal metaclass syntax
+		class Palette2(metaclass=enum): ...
+		```
+	'''
 	def __new__(cls, *args:Any) -> type: ...
 	def __init__(self, *args:Any) -> None: ...
-	def __repr__(cls) -> str: ...
+	def __repr__(cls) -> str:
+		'''	example:
+			```plaintext
+			<meta 'meta'>
+			<meta 'enum'>
+			<enum 'Palette'>
+			```
+		'''

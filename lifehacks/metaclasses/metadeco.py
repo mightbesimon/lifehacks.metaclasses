@@ -12,15 +12,6 @@ from typing import Any
 
 
 def metadeco(cls:type) -> type:
-	'''	make metaclass decoratable
-		```python
-		class Palette(metaclass=enum): ...
-		# without
-
-		@enum	# clean syntax, readable
-		class Palette: ...
-		```
-	'''
 	target_new = cls.__new__
 
 	@wraps(target_new)
@@ -44,7 +35,6 @@ def metadeco(cls:type) -> type:
 
 		if not args:
 			# called as @enum()
-			# cls -> enum:meta
 			return cls
 
 		raise TypeError(
