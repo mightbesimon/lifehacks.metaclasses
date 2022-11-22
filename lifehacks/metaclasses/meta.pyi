@@ -6,8 +6,11 @@
 	explicit or implicit permission.
 '''
 
-from .exceptions import EnumException
-from .meta import meta
-from .enum import enum
+from typing import Any
 
-__all__ = ['meta', 'enum', 'EnumException']
+
+class meta(type):
+	'''stub'''
+	def __new__(cls, *args:Any) -> type: ...
+	def __init__(self, *args:Any) -> None: ...
+	def __repr__(cls) -> str: ...

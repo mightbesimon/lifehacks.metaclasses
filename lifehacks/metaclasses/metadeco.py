@@ -25,7 +25,7 @@ def metadeco(cls:type) -> type:
 
 	@wraps(target_new)
 	def __new__(cls:type, *args:Any) -> type:
-		if (len(args)==3
+		if ( len(args)==3
 			and isinstance(args[0], str)
 			and isinstance(args[1], tuple)
 			and isinstance(args[2], dict)

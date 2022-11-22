@@ -6,8 +6,4 @@
 	explicit or implicit permission.
 '''
 
-from .exceptions import EnumException
-from .meta import meta
-from .enum import enum
-
-__all__ = ['meta', 'enum', 'EnumException']
+class EnumException(Exception): ...

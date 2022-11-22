@@ -33,7 +33,7 @@ class meta(type):
 		class Palette2(metaclass=enum): ...
 		```
 	'''
-	def __new__(cls:type,
+	def __new__( cls,
 		name:str,
 		bases:tuple[type],
 		attrs:dict[str, Any],

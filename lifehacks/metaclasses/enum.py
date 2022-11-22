@@ -43,13 +43,13 @@ class enum(type, Generic[T]):
 		```
 	'''
 
-	def __new__(cls:type,
+	def __new__( cls,
 		name:str,
 		bases:tuple[type],
 		attrs:dict[str, Any],
 	) -> type:
 		created_class: type = super(enum, cls).__new__(cls, name, bases, attrs)  # type: ignore
-		created_class.__init__ = enum.NO_INSTANTIATION
+		created_class.__init__ = cls.NO_INSTANTIATION
 		return created_class
 
 	def __str__(cls) -> str:
@@ -82,5 +82,5 @@ class enum(type, Generic[T]):
 		return obj in [ attr for _, attr in cls ]
 
 	@staticmethod
-	def NO_INSTANTIATION(*args:Any, **kwargs:Any):
+	def NO_INSTANTIATION(*args:Any, **kwargs:Any) -> None:
 		raise EnumException('Enum classes cannot be instantiated')
