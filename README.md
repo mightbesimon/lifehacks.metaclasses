@@ -1,4 +1,7 @@
-# lifehacks.metaclasses [![publish](https://github.com/mightbesimon/lifehacks.metaclasses/actions/workflows/publish.yml/badge.svg)](https://github.com/mightbesimon/lifehacks.metaclasses)
+# lifehacks.metaclasses [![version](https://img.shields.io/pypi/v/lifehacks.metaclasses?label=)](https://pypi.org/project/lifehacks-metaclasses/)
+
+[![sponsor](https://img.shields.io/github/sponsors/mightbesimon?color=red&label=Sponsor&logo=github)](https://github.com/sponsors/mightbesimon)
+[![publish](https://github.com/mightbesimon/lifehacks.metaclasses/actions/workflows/publish.yml/badge.svg)](https://github.com/mightbesimon/lifehacks.metaclasses)
 
 ## Structure
 
