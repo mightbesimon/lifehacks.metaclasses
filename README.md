@@ -103,4 +103,4 @@ p = Palette()	# illegal, raises EnumException
 ## Contributors
 
 - **Simon** - [mightbesimon](https://github.com/mightbesimon)
-- you?
+- 👉 you? 👈
