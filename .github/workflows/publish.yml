@@ -5,6 +5,9 @@ on:
     tags:
       - v*.*.*
 
+env:
+  PYTHON_VERSION: '3.7.6'
+
 jobs:
   test:
     name: 🧪 test
@@ -13,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.7.6'
+          python-version: ${{ env.PYTHON_VERSION }}
       - run: python -m unittest
 
   publish:
@@ -25,7 +28,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.7.6'
+          python-version: ${{ env.PYTHON_VERSION }}
       - run: pip install build
       - run: python -m build .
       - uses: pypa/gh-action-pypi-publish@release/v1
