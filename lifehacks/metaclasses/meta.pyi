@@ -6,10 +6,6 @@
 	explicit or implicit permission.
 '''
 
-from .metadeco import metadeco
-
-
-@metadeco
 class meta(type):
 	'''	metaclass for metaclasses 🍾\n
 		what an invention! 🎉\n
@@ -30,6 +26,7 @@ class meta(type):
 		```
 	'''
 	def __new__(cls, *args:..., **kwargs:...) -> type: ...
+	def __init__(self, *args:..., **kwargs:...) -> None: ...
 	def __repr__(cls) -> str:
 		'''	example:
 			```plaintext

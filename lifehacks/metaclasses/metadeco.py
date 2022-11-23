@@ -7,14 +7,12 @@
 '''
 
 from __future__ import annotations
-from functools import wraps
 from typing import Any
 
 
 def metadeco(cls:type) -> type:
 	target_new = cls.__new__
 
-	@wraps(target_new)
 	def __new__(cls:type, *args:Any) -> type:
 		if ( len(args)==3
 			and isinstance(args[0], str)

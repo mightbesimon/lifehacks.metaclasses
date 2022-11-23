@@ -7,12 +7,10 @@
 '''
 
 from typing import Generic, Iterator, TypeVar
-from .meta import meta
 
 
 T = TypeVar('T')
 
-@meta
 class enum(type, Generic[T]):
 	'''	metaclass for enum classes
 		```python
@@ -37,6 +35,7 @@ class enum(type, Generic[T]):
 		```
 	'''
 	def __new__(cls, *args:..., **kwargs:...) -> type: ...
+	def __init__(self, *args:..., **kwargs:...) -> None: ...
 	def __repr__(cls) -> str: ...
 	def __str__(cls) -> str: ...
 
