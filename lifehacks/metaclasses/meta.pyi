@@ -6,7 +6,6 @@
 	explicit or implicit permission.
 '''
 
-from typing import Any
 from .metadeco import metadeco
 
 
@@ -30,8 +29,7 @@ class meta(type):
 		class Palette2(metaclass=enum): ...
 		```
 	'''
-	def __new__(cls, *args:Any) -> type: ...
-	def __init__(self, *args:Any) -> None: ...
+	def __new__(cls, *args:..., **kwargs:...) -> type: ...
 	def __repr__(cls) -> str:
 		'''	example:
 			```plaintext

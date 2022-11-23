@@ -6,7 +6,7 @@
 	explicit or implicit permission.
 '''
 
-from typing import Any, Generic, Iterator, TypeVar
+from typing import Generic, Iterator, TypeVar
 from .meta import meta
 
 
@@ -36,8 +36,7 @@ class enum(type, Generic[T]):
 		print(BasePalette.BLACK in SubPalette) # True
 		```
 	'''
-	def __new__(cls, *args:Any) -> type: ...
-	def __init__(self, *args:Any) -> None: ...
+	def __new__(cls, *args:..., **kwargs:...) -> type: ...
 	def __repr__(cls) -> str: ...
 	def __str__(cls) -> str: ...
 
@@ -51,7 +50,7 @@ class enum(type, Generic[T]):
 			```
 		'''
 
-	def __contains__(cls, obj:T|Any) -> bool:
+	def __contains__(cls, obj:...) -> bool:
 		'''	check if obj is in this enum
 			as well as in base enums\n
 			e.g.
@@ -61,4 +60,4 @@ class enum(type, Generic[T]):
 		'''
 
 	@staticmethod
-	def NO_INSTANTIATION(*args:Any, **kwargs:Any) -> None: ...
+	def NO_INSTANTIATION(*args:..., **kwargs:...) -> None: ...
