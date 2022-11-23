@@ -7,10 +7,12 @@
 '''
 
 from typing import Any, Generic, Iterator, TypeVar
+from .meta import meta
 
 
 T = TypeVar('T')
 
+@meta
 class enum(type, Generic[T]):
 	'''	metaclass for enum classes
 		```python

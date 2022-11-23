@@ -7,8 +7,10 @@
 '''
 
 from typing import Any
+from .metadeco import metadeco
 
 
+@metadeco
 class meta(type):
 	'''	metaclass for metaclasses 🍾\n
 		what an invention! 🎉\n
