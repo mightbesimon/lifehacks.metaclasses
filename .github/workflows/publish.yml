@@ -1,4 +1,4 @@
-name: publish
+name: publish 🚀
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - v*.*.*
 
 env:
-  PYTHON_VERSION: '3.7.6'
+  PYTHON_VERSION: '3.9'
 
 jobs:
   test:
-    name: 🧪 test
+    name: test 🧪
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
 
   publish:
     needs: test
-    name: 🚀 publish
+    name: publish 🚀
     runs-on: ubuntu-latest
     steps:
       - run: echo VERSION=${GITHUB_REF#refs/tags/v} >> $GITHUB_ENV
