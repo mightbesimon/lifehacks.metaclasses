@@ -1,7 +1,8 @@
-# lifehacks.metaclasses [![version](https://img.shields.io/pypi/v/lifehacks.metaclasses?label=)](https://pypi.org/project/lifehacks-metaclasses/)
+# lifehacks.metaclasses ![version](https://img.shields.io/pypi/v/lifehacks.metaclasses?label=)
 
-[![sponsor](https://img.shields.io/github/sponsors/mightbesimon?color=red&label=Sponsor&logo=github)](https://github.com/sponsors/mightbesimon)
-[![publish](https://github.com/mightbesimon/lifehacks.metaclasses/actions/workflows/publish.yml/badge.svg)](https://github.com/mightbesimon/lifehacks.metaclasses)
+[![sponsor](https://img.shields.io/badge/-Sponsor_Us-%23d73a49)](https://github.com/sponsors/mightbesimon)
+![downloads](https://img.shields.io/pypi/dm/lifehacks.metaclasses?color=white&label=&logo=python)
+![publish](https://github.com/mightbesimon/lifehacks.metaclasses/actions/workflows/publish.yml/badge.svg)
 
 ## Structure
 
@@ -66,7 +67,7 @@ usage example:
 ```python
 from lifehacks.metaclasses import enum
 
-@enum
+@enum[Colour]
 class BasePalette:
 	BLACK = ...
 	WHITE = ...
@@ -77,7 +78,7 @@ class SubPalette(BasePalette):
 	GREEN = ...
 
 # can be used in type hinting
-def print_colours(palette:enum) -> None:
+def print_colours(palette:enum[Colour]) -> None:
 	for name, value in palette:
 		print(name, value)
 
